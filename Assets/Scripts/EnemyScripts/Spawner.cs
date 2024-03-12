@@ -7,25 +7,50 @@ public class Spawner : MonoBehaviour
 {
     public GameObject enemyPrefab; // Prefab do inimigo
     public Transform spawnPoint; // Ponto de spawn do inimigo
-    public float spawnInterval = 3f; // Intervalo de spawn em segundos
 
- 
+    public SpawnerControll spawnerControl;
 
-    void Start()
+    public int tamanhoDaHorda;
+    public int idSpawner;
+    public bool canSpawn;
+    int InimigosPorSpawn;
+
+   
+   
+
+    void Update()
     {
-        StartCoroutine(SpawnEnemy());
-    
-    }
-    IEnumerator SpawnEnemy()
-    {
-        while (true)
+        if (SpawnerControll.numeroSorteado == idSpawner && canSpawn == true )
         {
-            
-                // Instancia um inimigo no ponto de spawn
-                Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-            
-            // Espera o intervalo de spawn antes de instanciar o próximo inimigo
-            yield return new WaitForSeconds(spawnInterval);
+            SpawnEnemy();
         }
+        if (canSpawn == false) 
+        {
+            Invoke("EnableSpawn", spawnerControl.spawnInterval);
+        }
+       
+    }
+    void EnableSpawn() 
+    {
+        canSpawn = true;
+    } 
+
+    void  SpawnEnemy()
+    {
+        Debug.Log($"Spawn{idSpawner}");
+        if (canSpawn == true) 
+        {
+            for (int i = 0; i < tamanhoDaHorda; i++)
+            {
+                Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+                InimigosPorSpawn++;
+                
+            }
+               spawnerControl.GetComponent<SpawnerControll>().TimerSpawn();
+               canSpawn = false;
+            
+        }
+        
+        
     }
 }
