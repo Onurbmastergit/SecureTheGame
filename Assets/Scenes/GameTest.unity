@@ -1113,7 +1113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1700fb394a7a44889cc2ab1db76667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidade: 5
+  velocidade: 15
   animator: {fileID: 924607172}
   attackCollider: {fileID: 883122049}
 --- !u!54 &924607176
@@ -1924,7 +1924,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 40
+  field of view: 61
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
