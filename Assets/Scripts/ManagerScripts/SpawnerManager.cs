@@ -11,7 +11,7 @@ public class SpawnerManager : MonoBehaviour
 
     private void Start()
     {
-        // ComeÁa o processo de ativaÁ„o dos spawners
+        // Come√ßa o processo de ativa√ß√£o dos spawners
         StartCoroutine(GerenciarAtivacaoSpawners());
     }
 
@@ -19,19 +19,20 @@ public class SpawnerManager : MonoBehaviour
     {
         while (true)
         {
-            int sorteio = Random.Range(0, 2); // sorteia um n˙mero entre 0 e 1
-            if (sorteio == 0)
+            // Sorteia um √≠ndice aleat√≥rio dentro do tamanho da lista de spawners
+            int indiceSpawner = Random.Range(0, spawners.Length);
+
+            // Verifica se o spawner est√° ativado, se estiver, desativa-o ap√≥s spawnar a quantidade definida
+            if (spawners[indiceSpawner].EstaAtivo())
             {
-                // Ativa o primeiro spawner da lista
-                spawners[0].AtivarSpawner();
-            }
-            else
-            {
-                // Desativa o primeiro spawner da lista
-                spawners[0].DesativarSpawner();
+                spawners[indiceSpawner].DesativarSpawner();
+                yield return new WaitForSeconds(1f); // Aguarda 1 segundo para desativar o spawner
             }
 
-            // Espera um tempo aleatÛrio antes de ativar ou desativar outro spawner
+            // Ativa o spawner selecionado
+            spawners[indiceSpawner].AtivarSpawner();
+
+            // Espera um tempo aleat√≥rio antes de ativar outro spawner
             float tempoDeEspera = Random.Range(intervaloDeAtivacaoMinimo, intervaloDeAtivacaoMaximo);
             yield return new WaitForSeconds(tempoDeEspera);
         }
