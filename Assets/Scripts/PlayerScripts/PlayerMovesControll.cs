@@ -27,7 +27,7 @@ public class PlayerMovesControll : MonoBehaviour
         animator.SetFloat("InputX", movimentoHorizontal);
         animator.SetFloat("InputY", movimentoVertical);
 
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetKeyDown(KeyCode.Mouse1))
         {
             animator.SetBool("Attack" , true);
         }
