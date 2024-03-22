@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2116,7 +2116,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.2878, z: 3.39}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1475139418}
@@ -2213,7 +2213,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b26365df84961444c9eaa6bc1aed0aa1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.28, y: 1.28}
@@ -2221,7 +2221,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &924607175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2234,7 +2234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1700fb394a7a44889cc2ab1db76667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidade: 15
+  velocidade: 5
   animator: {fileID: 924607172}
   attackCollider: {fileID: 883122049}
 --- !u!54 &924607176
@@ -2387,7 +2387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &970206352
 Transform:
   m_ObjectHideFlags: 0
@@ -3184,7 +3184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1158541276
 Transform:
   m_ObjectHideFlags: 0
@@ -3788,6 +3788,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1510456259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510456260}
+  m_Layer: 0
+  m_Name: CameraRotation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1510456260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510456259}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 5.8207654e-11, w: 1}
+  m_LocalPosition: {x: 0.15, y: 2.159998, z: 3.460003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2016190501}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1574653960
 GameObject:
   m_ObjectHideFlags: 0
@@ -4764,7 +4796,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 75
+  field of view: 64.46
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4791,11 +4823,11 @@ Transform:
   m_GameObject: {fileID: 2016190498}
   serializedVersion: 2
   m_LocalRotation: {x: 0.31730163, y: 0.0013845168, z: -0.004137885, w: 0.94831467}
-  m_LocalPosition: {x: 0.07, y: 12.03, z: -11.98}
+  m_LocalPosition: {x: -0.080000006, y: 9.870002, z: -15.440002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1510456260}
   m_LocalEulerAnglesHint: {x: 37, y: 0, z: -0.5}
 --- !u!114 &2016190502
 MonoBehaviour:
@@ -4810,7 +4842,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 924607171}
-  smoothSpeed: 0.125
+  smoothSpeed: 1
+  rotationSensitivity: 6
 --- !u!1 &2064243048
 GameObject:
   m_ObjectHideFlags: 0
@@ -5263,7 +5296,7 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 2016190501}
+  - {fileID: 1510456260}
   - {fileID: 453067181}
   - {fileID: 512788215}
   - {fileID: 970206352}

@@ -13,7 +13,7 @@ public class CombatCollison : MonoBehaviour
         if(collider.GetComponent<EnemyController>() != null)
         {
             Debug.Log("Atingiu o inimigo");
-            collider.GetComponent<EnemyController>().animator.SetBool("Die" , true);
+            //collider.GetComponent<EnemyController>().animator.SetBool("Die" , true);
             collider.GetComponent<EnemyController>().die = true;
         }
     }

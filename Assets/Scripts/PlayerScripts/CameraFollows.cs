@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class CameraFollows : MonoBehaviour
 {
-    public Transform target; // O objeto que a c‚mera ir· seguir
-    public float smoothSpeed = 0.125f; // Velocidade de suavizaÁ„o do movimento da c‚mera
+  public Transform target; // O objeto que a c√¢mera ir√° seguir
+    public float smoothSpeed = 0.125f; // Velocidade de suaviza√ß√£o do movimento da c√¢mera
+    public float rotationSensitivity = 2.0f; // Sensibilidade de rota√ß√£o da c√¢mera
 
-    private Vector3 offset; // A dist‚ncia entre a c‚mera e o objeto seguido
+    private Vector3 offset; // A dist√¢ncia entre a c√¢mera e o objeto seguido
+    private bool rotating = false; // Flag para controlar se a c√¢mera est√° rotacionando ou n√£o
 
     void Start()
     {
+        if (target == null)
+        {
+            target = GameObject.FindWithTag("Player").transform;
+            if (target == null)
+            {
+                Debug.LogError("CameraFollows: O objeto com a tag 'Player' n√£o foi encontrado.");
+                return;
+            }
+        }
+        
         offset = transform.position - target.position; // Calcula o offset inicial
     }
 
@@ -18,9 +30,31 @@ public class CameraFollows : MonoBehaviour
     {
         if (target != null)
         {
-            Vector3 desiredPosition = target.position + offset; // Calcula a posiÁ„o desejada da c‚mera
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed); // Suaviza o movimento da c‚mera
-            transform.position = smoothedPosition; // Atualiza a posiÁ„o da c‚mera
+            // Calcula a posi√ß√£o desejada da c√¢mera
+            Vector3 desiredPosition = target.position + offset;
+            
+            // Suaviza o movimento da c√¢mera
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+            
+            // Atualiza a posi√ß√£o da c√¢mera
+            transform.position = smoothedPosition;
+
+            // Se o bot√£o do mouse 0 estiver pressionado, rotaciona a c√¢mera
+            if (Input.GetMouseButton(0))
+            {
+                RotateCamera();
+            }
+
+            // Faz a c√¢mera olhar para o alvo (o jogador)
+            transform.LookAt(target);
         }
+    }
+
+    void RotateCamera()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * rotationSensitivity;
+
+    // Rotaciona a c√¢mera em torno do jogador apenas horizontalmente
+        transform.RotateAround(target.position, Vector3.up, mouseX);
     }
 }
