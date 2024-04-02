@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - HouseDefender
+  - AttackCollider
   layers:
   - Default
   - TransparentFX
@@ -12,7 +13,7 @@ TagManager:
   - PostProcess
   - Water
   - UI
-  - 
+  - Pixelation
   - 
   - 
   - 
