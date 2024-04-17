@@ -6,15 +6,20 @@ using UnityEngine;
 public class CombatCollison : MonoBehaviour
 {
 
-
+  
 
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.GetComponent<EnemyController>() != null)
+
+        if(collider.TryGetComponent<EnemyStatus>(out EnemyStatus enemyStatus))
         {
-            Debug.Log("Atingiu o inimigo");
-            //collider.GetComponent<EnemyController>().animator.SetBool("Die" , true);
-            collider.GetComponent<EnemyController>().die = true;
+            enemyStatus.ReceberDano(5);
+            Debug.Log("Bateu 2");
+        }
+        if (collider.CompareTag("Zombie")) 
+        {
+            collider.GetComponent<EnemyStatus>().ReceberDano(6);
+            Debug.Log("Bateu");
         }
     }
 

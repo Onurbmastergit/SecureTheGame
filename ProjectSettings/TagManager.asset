@@ -7,6 +7,7 @@ TagManager:
   - HouseDefender
   - AttackCollider
   - Build
+  - Zombie
   layers:
   - Default
   - TransparentFX
