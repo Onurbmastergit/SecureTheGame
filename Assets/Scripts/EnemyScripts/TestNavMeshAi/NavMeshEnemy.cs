@@ -7,10 +7,12 @@ public class NavMeshEnemy : MonoBehaviour
 {
     private EnemyManager enemyManager;
     private Transform point;
+    private NavMeshAgent agent;
     
     void Start()
     {
         enemyManager = GetComponent<EnemyManager>();
+        agent = GetComponent<NavMeshAgent>();
 
         point = GameObject.FindWithTag("HouseDefender").transform;
     }
@@ -18,9 +20,15 @@ public class NavMeshEnemy : MonoBehaviour
    
     void Update()
     {
-        if (enemyManager.buildOn.buildAttack == true) 
+        if (enemyManager.buildOn.buildAttack == false)
         {
-            enemyManager.agent.SetDestination(point.position);
+            Debug.Log("Olha a Constru��o");
+            agent.enabled = true;
+            agent.SetDestination(point.position);
+        }
+        else 
+        {
+            agent.enabled = false;
         }
         
     }

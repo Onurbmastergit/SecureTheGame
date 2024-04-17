@@ -10,12 +10,14 @@ public class DetectionCollider : MonoBehaviour
     {
         if (other.CompareTag("Build"))
         { 
-            Debug.Log("Construção");
+            Debug.Log("Construï¿½ï¿½o");
             buildAttack = true;
         }
-        else 
+    }
+    void OnTriggerExit(Collider collider)
+    {
+        if(collider.CompareTag("Build"))
         {
-            Debug.Log("Não Construção");
             buildAttack = false;
         }
     }
