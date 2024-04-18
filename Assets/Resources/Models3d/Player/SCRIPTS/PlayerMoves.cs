@@ -4,53 +4,63 @@ using UnityEngine;
 
 public class PlayerMoves : MonoBehaviour
 {
-    public float velocidade = 5f;
-    public float suavidadeRotacao = 5f; // Ajuste este valor para controlar a suavidade da rotação
-    [SerializeField]
-    private CharacterController characterController;
-    [SerializeField]
-    private InputControllers inputControllers;
-    public float movimentoHorizontal; 
-    public float movimentoVertical;
+    public float moveSpeed = 10f; // Velocidade de movimento do jogador
+    public float rotationSpeed = 10f; // Velocidade de rotação do jogador
+    Vector3 movement;
+
+    private CharacterController controller; // Componente CharacterController do jogador
+    private InputControllers inputController;
 
     void Start()
     {
-        inputControllers = GetComponent<InputControllers>();
-        characterController = GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>();
+        inputController = GetComponent<InputControllers>();
     }
 
     void Update()
     {
-        movimentoHorizontal = inputControllers.movimentoHorizontal;
-        movimentoVertical = inputControllers.movimentoVertical;
+        MovePlayer(); // Movimentar o jogador
+        RotatePlayer(); // Rotacionar o jogador em direção ao cursor
+    }
 
+    void MovePlayer()
+    {
        
+        // Obter entrada do teclado para movimento
+        float moveHorizontal = inputController.movimentoHorizontal;
+        float moveVertical = inputController.movimentoVertical;
 
-        Vector3 movimento = new Vector3(movimentoHorizontal, 0f, movimentoVertical);
-
-        if (movimento.magnitude > 1f)
+        // Calcular a direção de movimento
+        movement = new Vector3(moveHorizontal, 0f, moveVertical);
+        movement = transform.TransformDirection(movement); // Converter para coordenadas locais
+        movement *= moveSpeed * Time.deltaTime;
+       
+        // Mover o jogador usando o CharacterController
+        controller.Move(movement);
+        if (inputController.Run)
         {
-            movimento.Normalize();
+            RunPlayer();
         }
-        
-        movimento *= velocidade * Time.deltaTime;
+    }
+    void RunPlayer() 
+    {
+        controller.Move(movement*2*Time.deltaTime);
+    }
 
-        if(inputControllers.Run)
-        {
-            movimento *= 2;
-        }
+    void RotatePlayer()
+    {
+        // Obter a posição do mouse na tela
+        Vector3 mousePosition = Input.mousePosition;
 
-        characterController.Move(movimento);
+        // Converter a posição do mouse de pixels para coordenadas do mundo
+        mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.transform.position.y - transform.position.y));
 
-        // Verifica se há movimento antes de virar o jogador
-        if (movimento != Vector3.zero)
-        {
-            // Calcula a rotação para a direção do movimento
-            Quaternion novaRotacao = Quaternion.LookRotation(movimento);
-            // Interpola suavemente entre a rotação atual e a nova rotação
-            Quaternion rotacaoSuave = Quaternion.Lerp(transform.rotation, novaRotacao, suavidadeRotacao * Time.deltaTime);
-            // Aplica a rotação ao jogador, mas mantém a rotação vertical original
-            transform.rotation = Quaternion.Euler(0f, rotacaoSuave.eulerAngles.y, 0f);
-        }
+        // Calcular a direção para a qual o jogador deve se orientar
+        Vector3 lookDirection = mousePosition - transform.position;
+        lookDirection.y = 0f; // Garantir que o jogador não rotacione no eixo Y
+
+        // Rotacionar o jogador suavemente em direção à direção calculada
+        Quaternion rotation = Quaternion.LookRotation(lookDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
     }
 }

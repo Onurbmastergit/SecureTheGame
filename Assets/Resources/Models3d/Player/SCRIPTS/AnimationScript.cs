@@ -18,6 +18,7 @@ public class AnimationScript : MonoBehaviour
 
     void Start()
     {
+        
         animator = GetComponent<Animator>();
         inputControllers = GetComponent<InputControllers>();
         playerMoves = GetComponent<PlayerMoves>();
@@ -25,8 +26,10 @@ public class AnimationScript : MonoBehaviour
     }
     void Update()
     {
-        walk = playerMoves.movimentoHorizontal != 0 || playerMoves.movimentoVertical != 0;
-        animator.SetBool("Walk", walk);
+       
+          
+        animator.SetFloat("InputX",inputControllers.movimentoHorizontal);
+        animator.SetFloat("InputY",inputControllers.movimentoVertical);
 
         attack = inputControllers.Attack;
         animator.SetBool("Attack" , attack);
@@ -38,11 +41,11 @@ public class AnimationScript : MonoBehaviour
     public void EnableCollison()
     {
         attackCollider.GetComponent<Collider>().enabled = true;
-        attackCollider.GetComponent<MeshRenderer>().enabled = true;
+      
     }
     public void DisableCollison()
     {
         attackCollider.GetComponent<Collider>().enabled = false;
-        attackCollider.GetComponent<MeshRenderer>().enabled = false;
+   
     }
 }

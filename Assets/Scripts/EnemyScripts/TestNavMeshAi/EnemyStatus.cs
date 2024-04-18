@@ -41,6 +41,7 @@ public class EnemyStatus : MonoBehaviour
     {
         if (vidaAtual <= 0) 
         {
+            animator.SetBool("Hit", false);
             Destroy(rb);
             agent.enabled = false;
         }
@@ -51,8 +52,10 @@ public class EnemyStatus : MonoBehaviour
     }
     public void DisableAnimation() 
     {
+
+        animator.SetBool("Hit", false);
         tomouDano = false;
         agent.enabled = true;
-        animator.SetBool("Hit", false);
+        
     }
 }
