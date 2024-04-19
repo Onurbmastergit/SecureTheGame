@@ -46,6 +46,7 @@ public class PlayerMoves : MonoBehaviour
     void RunPlayer() 
     {
         controller.Move(movement * 5 * Time.deltaTime);
+        movement.Normalize();
     }
 
     void RotatePlayer()

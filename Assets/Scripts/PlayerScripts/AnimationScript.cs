@@ -27,8 +27,8 @@ public class AnimationScript : MonoBehaviour
     }
     void Update()
     {
-       
-          
+
+        animator.SetInteger("Hand", inputControllers.hand);  
         animator.SetFloat("InputX",inputControllers.movimentoHorizontal);
         animator.SetFloat("InputY",inputControllers.movimentoVertical);
         walk = inputControllers.movimentoHorizontal > 0 || inputControllers.movimentoVertical > 0;    
