@@ -17,6 +17,7 @@ public class EnemyStatus : MonoBehaviour
 
     void Start() 
     {
+        vidaAtual = vidaBase;
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();

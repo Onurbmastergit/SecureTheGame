@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class PlayerStatus : MonoBehaviour
 {
-   int vidaTotal = 100;
+    public int vidaTotal = 100;
     public int vidaAtual;
 
     public UnityEngine.UI.Image BarLifeStatus;
-    float fillAmount;
+     public float fillAmount;
 
     void Start()
     {
